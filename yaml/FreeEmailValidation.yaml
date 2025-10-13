@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: MailboxValidator Free Email API
+  description: The MailboxValidator Free Email Checker checks if a single email address is from a free email provider and returns the results in either JSON or XML format. Refer to https://www.mailboxvalidator.com/api-email-free for further information.
+  version: 2
+  contact:
+    name: MailboxValidator
+    url: https://github.com/MailboxValidator/mailboxvalidator-openapi
+servers:
+  - url: https://api.mailboxvalidator.com
+paths:
+  /v2/email/free:
+    get:
+      summary: Validate an email address using Free Email API
+      description: The Free Email Checker API does validation on a single email address and returns if it is from a free email provider in either JSON or XML format.
+      operationId: freeEmailApi
+      parameters:
+        - name: key
+          in: query
+          schema:
+            type: string
+          description: (required) API key.
+        - name: email
+          in: query
+          schema:
+            type: string
+            example: example@example.com
+          description: (required) The email address to check if is from a free email
+            provider.
+        - name: format
+          in: query
+          schema:
+            type: string
+            example: json
+          description: |-
+            (optional) Return the result in json (default) or xml format.
+            Valid values: json | xml
+      responses:
+        "200":
+          description: Free Email API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  credits_available:
+                    type: number
+                    example: 9999
+                  email_address:
+                    type: string
+                    example: example@example.com
+                  is_free:
+                    type: boolean
+                    example: false
+              examples:
+                Free Email API:
+                  value:
+                    credits_available: 9999
+                    email_address: example@example.com
+                    is_free: false
+

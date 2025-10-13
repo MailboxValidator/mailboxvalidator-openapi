@@ -1,0 +1,186 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MailboxValidator",
+    "description": "The Single Validation API does validation on a single email address and returns all the validation results in either JSON or XML format. Refer to https://www.mailboxvalidator.com for further information.",
+    "version": "2",
+    "contact": {
+		"name": "MailboxValidator",
+		"url": "https://github.com/MailboxValidator/mailboxvalidator-openapi"
+	}
+  },
+  "servers": [
+    {
+      "url": "https://api.mailboxvalidator.com"
+    }
+  ],
+  "paths": {
+    "/v2/validation/single": {
+      "get": {
+        "summary": "Single Email Validation API",
+        "description": "The Single Validation API does validation on a single email address and returns all the validation results in either JSON or XML format.",
+        "operationId": "singleEmailValidationApi",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "(required) API key."
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "example@example.com"
+            },
+            "description": "(required) The email address to be validated."
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json"
+            },
+            "description": "(optional) Return the result in json (default) or xml format.\nValid values: json | xml"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Single Email Validation response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "base_email_address": {
+                      "type": "string",
+                      "example": "example@example.com"
+                    },
+                    "credits_available": {
+                      "type": "number",
+                      "example": 9999
+                    },
+                    "domain": {
+                      "type": "string",
+                      "example": "example.com"
+                    },
+                    "email_address": {
+                      "type": "string",
+                      "example": "example@example.com"
+                    },
+                    "is_catchall": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "is_disposable": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "is_dmarc_enforced": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "is_domain": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "is_free": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "is_greylisted": {
+                      "nullable": true,
+                      "example": null
+                    },
+                    "is_high_risk": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "is_role": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "is_server_down": {
+                      "nullable": true,
+                      "example": null
+                    },
+                    "is_smtp": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "is_strict_spf": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "is_suppressed": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "is_syntax": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "is_verified": {
+                      "nullable": true,
+                      "example": null
+                    },
+                    "mailboxvalidator_score": {
+                      "type": "number",
+                      "example": 0.1
+                    },
+                    "status": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "time_taken": {
+                      "type": "number",
+                      "example": 0.1775
+                    },
+                    "website_exist": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Single Email Validation": {
+                    "value": {
+                      "base_email_address": "example@example.com",
+                      "credits_available": 9999,
+                      "domain": "example.com",
+                      "email_address": "example@example.com",
+                      "is_catchall": false,
+                      "is_disposable": false,
+                      "is_dmarc_enforced": false,
+                      "is_domain": true,
+                      "is_free": false,
+                      "is_greylisted": null,
+                      "is_high_risk": false,
+                      "is_role": false,
+                      "is_server_down": null,
+                      "is_smtp": false,
+                      "is_strict_spf": true,
+                      "is_suppressed": true,
+                      "is_syntax": true,
+                      "is_verified": null,
+                      "mailboxvalidator_score": 0.1,
+                      "status": false,
+                      "time_taken": 0.1775,
+                      "website_exist": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

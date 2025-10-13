@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: MailboxValidator Disposable Email API
+  description: The MailboxValidator Disposable Email Checker API checks if a single email address is from a disposable email provider and returns the results in either JSON or XML format. Refer to https://www.mailboxvalidator.com/api-email-disposable for further information.
+  version: 2
+  contact: 
+    name: MailboxValidator
+    url: https://github.com/MailboxValidator/mailboxvalidator-openapi
+servers:
+  - url: https://api.mailboxvalidator.com
+paths:
+  /v2/email/disposable:
+    get:
+      summary: Validate an email address using Disposable Email API
+      description: The Disposable Email Checker API does checking on a single email address and returns if it is from a disposable email provider in either JSON or XML format.
+      operationId: disposableEmailApi
+      parameters:
+        - name: key
+          in: query
+          schema:
+            type: string
+          description: (required) API key.
+        - name: email
+          in: query
+          schema:
+            type: string
+            example: example@example.com
+          description: (required) The email address to check if is from a disposable email
+            provider.
+        - name: format
+          in: query
+          schema:
+            type: string
+            example: json
+          description: |-
+            (optional) Return the result in json (default) or xml format.
+            Valid values: json | xml
+      responses:
+        "200":
+          description: Disposable Email API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  credits_available:
+                    type: number
+                    example: 9999
+                  email_address:
+                    type: string
+                    example: example@example.com
+                  is_disposable:
+                    type: boolean
+                    example: false
+              examples:
+                Disposable Email API:
+                  value:
+                    credits_available: 9999
+                    email_address: example@example.com
+                    is_disposable: false
+
